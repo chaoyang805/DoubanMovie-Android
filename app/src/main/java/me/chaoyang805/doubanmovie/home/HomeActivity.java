@@ -1,8 +1,11 @@
-package me.chaoyang805.doubanmovie;
+package me.chaoyang805.doubanmovie.home;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.SwipeDismissBehavior;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import me.chaoyang805.doubanmovie.R;
 
 public class HomeActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {

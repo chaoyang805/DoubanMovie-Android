@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import me.chaoyang805.doubanmovie.data.Movie;
+import me.chaoyang805.doubanmovie.data.DoubanMovie;
 
 /**
  * Created by chaoyang805 on 16/10/15.
@@ -36,7 +36,7 @@ public class MovieListFragment extends Fragment implements MovieListContract.Vie
     }
 
     @Override
-    public void showMovieListView(List<Movie> movies) {
+    public void showMovieListView(List<DoubanMovie> movies) {
 
     }
 

@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import me.chaoyang805.doubanmovie.data.Movie;
+import me.chaoyang805.doubanmovie.data.DoubanMovie;
 
 /**
  * Created by chaoyang805 on 16/10/15.
@@ -33,7 +33,7 @@ public class MovieDetailFragment extends Fragment implements MovieDetailContract
     }
 
     @Override
-    public void showMovieDetailView(Movie movie) {
+    public void showMovieDetailView(DoubanMovie doubanMovie) {
 
     }
 

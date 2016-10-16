@@ -2,7 +2,7 @@ package me.chaoyang805.doubanmovie.home;
 
 import android.support.annotation.NonNull;
 
-import me.chaoyang805.doubanmovie.data.Movie;
+import me.chaoyang805.doubanmovie.data.DoubanMovie;
 import me.chaoyang805.doubanmovie.data.source.MoviesRepository;
 
 /**
@@ -31,7 +31,7 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     @Override
-    public void openMovieDetails(Movie detailMovie) {
+    public void openMovieDetails(DoubanMovie detailDoubanMovie) {
 
     }
 }

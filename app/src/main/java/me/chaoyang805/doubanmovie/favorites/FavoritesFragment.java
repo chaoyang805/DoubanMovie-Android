@@ -1,11 +1,10 @@
 package me.chaoyang805.doubanmovie.favorites;
 
 import android.app.Fragment;
-import android.os.Bundle;
 
 import java.util.List;
 
-import me.chaoyang805.doubanmovie.data.Movie;
+import me.chaoyang805.doubanmovie.data.DoubanMovie;
 
 /**
  * Created by chaoyang805 on 16/10/15.
@@ -20,7 +19,7 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Vie
     }
 
     @Override
-    public void showFavoritesView(List<Movie> movies) {
+    public void showFavoritesView(List<DoubanMovie> movies) {
 
     }
 
@@ -30,7 +29,7 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Vie
     }
 
     @Override
-    public void showAddFavoriteSuccessView(Movie movie) {
+    public void showAddFavoriteSuccessView(DoubanMovie doubanMovie) {
 
     }
 

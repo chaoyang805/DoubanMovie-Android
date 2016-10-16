@@ -1,13 +1,20 @@
 package me.chaoyang805.doubanmovie.home;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
-import me.chaoyang805.doubanmovie.data.Movie;
+import java.util.List;
+
+import me.chaoyang805.doubanmovie.R;
+import me.chaoyang805.doubanmovie.data.DoubanMovie;
 
 /**
  * Created by chaoyang805 on 16/10/15.
@@ -29,7 +36,10 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        LinearLayout root = (LinearLayout) inflater.inflate(R.layout.fragment_home, container, false);
+        ViewPager pager = (ViewPager) root.findViewById(R.id.view_pager);
+//        pager.setAdapter();
+        return root;
     }
 
     @Override
@@ -44,7 +54,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     }
 
     @Override
-    public void showMoviesDetailUI(Movie movie) {
+    public void showMoviesDetailUI(DoubanMovie doubanMovie) {
 
     }
 
@@ -55,6 +65,28 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
     @Override
     public boolean isActive() {
-        return false;
+        return isAdded();
+    }
+
+    static class MoviePagerAdapter extends FragmentPagerAdapter {
+
+        private HomeContract.Presenter mPresenter;
+        private List<DoubanMovie> mMovies;
+        public MoviePagerAdapter(HomeContract.Presenter presenter, FragmentManager fm, List<DoubanMovie> movies) {
+            super(fm);
+            mPresenter = presenter;
+            mMovies = movies;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            return new PagerItemFragment();
+        }
+
+        @Override
+        public int getCount() {
+            return mMovies.size();
+        }
     }
 }

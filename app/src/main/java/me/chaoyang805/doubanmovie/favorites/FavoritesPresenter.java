@@ -1,6 +1,6 @@
 package me.chaoyang805.doubanmovie.favorites;
 
-import me.chaoyang805.doubanmovie.data.Movie;
+import me.chaoyang805.doubanmovie.data.DoubanMovie;
 
 /**
  * Created by chaoyang805 on 16/10/15.
@@ -25,7 +25,7 @@ public class FavoritesPresenter implements FavoritesContract.Presenter {
     }
 
     @Override
-    public void addFavoriteMovie(Movie movie) {
+    public void addFavoriteMovie(DoubanMovie doubanMovie) {
 
     }
 }

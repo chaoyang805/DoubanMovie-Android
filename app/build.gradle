@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -28,6 +30,28 @@ android {
     dataBinding {
         enabled = true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    retrolambda {
+        javaVersion JavaVersion.VERSION_1_6
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
 dependencies {
@@ -35,10 +59,31 @@ dependencies {
     androidTestCompile("com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
-    compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
-    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
-    compile "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
     testCompile "junit:junit:$rootProject.ext.junitVersion"
+    // support library
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+
+    compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
+
+    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
+
+    compile "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
+
+    // annotations
     compile 'org.jetbrains:annotations-java5:15.0'
+    // google library
+    //    compile "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
+    compile "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+    // squareup library
+    compile "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitPluginVersion"
+
+    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofitPluginVersion"
+    // RxJava library
+    compile "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxJavaVersion"
+
+    compile "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
+
+    compile files('libs/glide-3.7.0.jar')
 }

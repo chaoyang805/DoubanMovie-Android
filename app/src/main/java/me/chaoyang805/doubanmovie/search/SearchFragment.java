@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import me.chaoyang805.doubanmovie.data.Movie;
+import me.chaoyang805.doubanmovie.data.DoubanMovie;
 import me.chaoyang805.doubanmovie.search.SearchContract.View;
 
 /**
@@ -36,7 +36,7 @@ public class SearchFragment extends Fragment implements View {
     }
 
     @Override
-    public void showSearchResultsView(List<Movie> searchResults) {
+    public void showSearchResultsView(List<DoubanMovie> searchResults) {
 
     }
 

@@ -3,7 +3,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="collect_count_desc">%d人已看</string>
     <string name="action_settings">Settings</string>
     <string name="movie_poster">Movie Poster</string>
 </resources>

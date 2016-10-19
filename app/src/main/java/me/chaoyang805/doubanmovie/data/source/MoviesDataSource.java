@@ -6,4 +6,5 @@ package me.chaoyang805.doubanmovie.data.source;
 
 public interface MoviesDataSource {
 
+
 }

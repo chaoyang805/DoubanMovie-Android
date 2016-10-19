@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="actionHandler"
+            type="me.chaoyang805.doubanmovie.home.HomeContract.Presenter"/>
+        <variable
+            name="movie"
+            type="me.chaoyang805.doubanmovie.data.DoubanMovie"/>
+    </data>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,8 +16,8 @@
     android:background="#EFEFF4"
     android:gravity="center"
     android:orientation="vertical">
-
     <android.support.v7.widget.CardView
+        android:layout_marginTop="40dp"
         android:layout_width="280dp"
         android:layout_height="373dp"
         android:padding="48dp"
@@ -18,17 +27,18 @@
 
         <ImageView
             android:id="@+id/movie_image"
+            android:imageUrl="@{movie.images.largeImageUrl}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/movie_poster"
-            android:scaleType="centerCrop"
-            android:src="@drawable/poster"/>
+            android:onClick="@{() -> actionHandler.openMovieDetails(movie)}"
+            android:background="?android:selectableItemBackground"
+            android:scaleType="centerCrop"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:background="@color/colorPrimaryDark"
-
             android:orientation="horizontal">
 
             <LinearLayout
@@ -45,12 +55,13 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-bold"
-                    android:text="湄公河行动"
+                    android:typeface="sans"
+                    android:text="@{movie.title}"
                     android:maxLines="1"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:textAllCaps="false"
-                    android:textColor="@android:color/primary_text_dark"
+                    android:textColor="@android:color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
 
@@ -61,22 +72,26 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="102013人已看"
+                    android:text="@{@string/collect_count_desc(movie.collectCount)}"
                     android:textColor="@android:color/secondary_text_dark_nodisable"
                     android:textSize="12sp"/>
             </LinearLayout>
-            <ImageView
+            <me.chaoyang805.doubanmovie.home.ui.StarRatingView
+                android:id="@+id/raing_view"
+                app:ratingScore="@{movie.rating.average}"
+                app:starBgColor="#ccc"
+
                 android:paddingLeft="8dp"
+                android:paddingRight="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginEnd="16dp"
-                android:id="@+id/rating_star"
-                android:scaleType="fitStart"
-                android:src="@drawable/rating"
-                android:layout_width="36dp"
-                android:layout_height="match_parent"/>
+                android:layout_width="22dp"
+                android:layout_height="wrap_content"/>
+
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
 
 </LinearLayout>
+</layout>

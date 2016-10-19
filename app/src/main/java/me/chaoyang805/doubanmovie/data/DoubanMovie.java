@@ -41,6 +41,8 @@ public class DoubanMovie extends RealmObject {
 
     private DoubanImage images;
 
+    private MovieRating rating;
+
     private String alt;
 
     private String genresDesc;
@@ -235,5 +237,13 @@ public class DoubanMovie extends RealmObject {
     public void setContries(List<String> contries) {
         this.contries = contries;
         this.contriesDesc = StringUtils.combinedString(contries, "/");
+    }
+
+    public MovieRating getRating() {
+        return rating;
+    }
+
+    public void setRating(MovieRating rating) {
+        this.rating = rating;
     }
 }

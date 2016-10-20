@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -13,11 +14,24 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.internal.operators.observable.ObservableUnsubscribeOn;
+import io.reactivex.internal.subscriptions.ArrayCompositeSubscription;
 import io.realm.Realm;
 import me.chaoyang805.doubanmovie.R;
 import me.chaoyang805.doubanmovie.base.ToolbarActivity;
 import me.chaoyang805.doubanmovie.data.DoubanMovie;
 import me.chaoyang805.doubanmovie.data.source.MoviesRepository;
+import me.chaoyang805.doubanmovie.data.source.remote.MoviesRemoteDataSource;
 import me.chaoyang805.doubanmovie.utils.ActivityUtils;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -50,6 +64,25 @@ public class HomeActivity extends ToolbarActivity
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), homeFragment, R.id.content_frame);
         }
         mPresenter = new HomePresenter(new MoviesRepository(), homeFragment);
+//        testNetwork();
+    }
+
+    private void testNetwork() {
+        MoviesRemoteDataSource remoteDataSource = new MoviesRemoteDataSource();
+        Disposable disposable = remoteDataSource.loadMovies(0, 5)
+            .observeOn(AndroidSchedulers.mainThread())
+            .flatMap(Observable::fromIterable)
+            .subscribe(this::showMovie, Throwable::printStackTrace);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    private void showMovie(DoubanMovie movie) {
+        Log.d("HomeActivity", movie.getTitle());
     }
 
     @Override

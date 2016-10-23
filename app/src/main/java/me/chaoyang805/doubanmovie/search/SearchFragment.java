@@ -1,13 +1,14 @@
 package me.chaoyang805.doubanmovie.search;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import java.util.List;
 
+import me.chaoyang805.doubanmovie.R;
 import me.chaoyang805.doubanmovie.data.DoubanMovie;
 import me.chaoyang805.doubanmovie.search.SearchContract.View;
 
@@ -26,13 +27,13 @@ public class SearchFragment extends Fragment implements View {
     @Nullable
     @Override
     public android.view.View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.start();
+//        mPresenter.start();
     }
 
     @Override

@@ -43,10 +43,6 @@ public class DoubanAPI {
         mDoubanService = retrofit.create(DoubanService.class);
     }
 
-    private static DoubanService sDoubanService = null;
-
-    private static final Object LOCK = new Object();
-
     DoubanService getDoubanService() {
         return mDoubanService;
     }

@@ -14,7 +14,7 @@ public class ActivityUtils extends Object {
     public static void addFragmentToActivity(@NonNull FragmentManager fragmentManager,
                                              @NonNull Fragment fragment,
                                              @IdRes int contentId) {
-        fragmentManager.beginTransaction().add(contentId, fragment).commit();
+        fragmentManager.beginTransaction().addToBackStack("HomeActivity").add(contentId, fragment).commit();
     }
 
 }

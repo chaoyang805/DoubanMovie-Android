@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.DecelerateInterpolator;
 
@@ -67,7 +68,6 @@ public abstract class ToolbarActivity extends BaseActivity {
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
         }
-
         if (Build.VERSION.SDK_INT >= 21) {
             mAppBar.setElevation(10.6f);
         }
@@ -99,4 +99,12 @@ public abstract class ToolbarActivity extends BaseActivity {
             .start();
         mIsHidden = !mIsHidden;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home, menu);
+        return true;
+    }
+
+
 }

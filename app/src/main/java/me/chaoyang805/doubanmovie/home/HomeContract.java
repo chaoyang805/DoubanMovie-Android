@@ -1,5 +1,7 @@
 package me.chaoyang805.doubanmovie.home;
 
+import java.util.List;
+
 import me.chaoyang805.doubanmovie.BasePresenter;
 import me.chaoyang805.doubanmovie.BaseView;
 import me.chaoyang805.doubanmovie.data.DoubanMovie;
@@ -11,7 +13,9 @@ import me.chaoyang805.doubanmovie.data.DoubanMovie;
 public interface HomeContract {
 
     interface View extends BaseView<Presenter> {
-        void showMovies();
+        void showMovies(List<DoubanMovie> movies);
+        void showLoadingIndicator();
+        void hideLoadingIndicator();
         void showMoviesDetailUI(DoubanMovie doubanMovie);
         void showLoadingMoviesError();
         boolean isActive();

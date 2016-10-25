@@ -25,7 +25,12 @@ public class MovieListPresenter implements MovieListContract.Presenter {
     }
 
     @Override
-    public void start() {
-        loadMovieList(false);
+    public void subscribe() {
+
+    }
+
+    @Override
+    public void unsubscribe() {
+
     }
 }

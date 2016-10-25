@@ -11,14 +11,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.MenuItem;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import me.chaoyang805.doubanmovie.R;
 import me.chaoyang805.doubanmovie.base.DrawerActivity;
-import me.chaoyang805.doubanmovie.data.DoubanMovie;
 import me.chaoyang805.doubanmovie.data.source.MoviesRepository;
-import me.chaoyang805.doubanmovie.data.source.remote.MoviesRemoteDataSource;
 import me.chaoyang805.doubanmovie.favorites.FavoritesFragment;
 import me.chaoyang805.doubanmovie.movielist.MovieListFragment;
 import me.chaoyang805.doubanmovie.search.SearchFragment;
@@ -39,19 +34,6 @@ public class HomeActivity extends DrawerActivity
     @Override
     protected NavigationView.OnNavigationItemSelectedListener onSetNavigationItemListener() {
         return this;
-    }
-
-
-    private void testNetwork() {
-        MoviesRemoteDataSource remoteDataSource = new MoviesRemoteDataSource();
-        Disposable disposable = remoteDataSource.loadMovies(0, 5)
-            .observeOn(AndroidSchedulers.mainThread())
-            .flatMap(Observable::fromIterable)
-            .subscribe(this::showMovie, Throwable::printStackTrace);
-    }
-
-    private void showMovie(DoubanMovie movie) {
-        Log.d("HomeActivity", movie.getTitle());
     }
 
     @Override
@@ -75,9 +57,10 @@ public class HomeActivity extends DrawerActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_refresh) {
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -135,7 +118,7 @@ public class HomeActivity extends DrawerActivity
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), homeFragment, R.id.content_frame);
             mManagedFragments[0] = homeFragment;
         }
-        mPresenter = new HomePresenter(new MoviesRepository(), (HomeFragment)homeFragment);
+        mPresenter = new HomePresenter(new MoviesRepository(getApplicationContext()), (HomeFragment)homeFragment);
         mToolbar.setTitle(R.string.title_now);
 
     }

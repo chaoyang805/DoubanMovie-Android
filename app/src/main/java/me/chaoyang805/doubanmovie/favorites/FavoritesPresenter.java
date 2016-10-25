@@ -8,12 +8,6 @@ import me.chaoyang805.doubanmovie.data.DoubanMovie;
 
 public class FavoritesPresenter implements FavoritesContract.Presenter {
 
-
-    @Override
-    public void start() {
-
-    }
-
     @Override
     public void loadMovies(boolean forceUpdate) {
 
@@ -26,6 +20,16 @@ public class FavoritesPresenter implements FavoritesContract.Presenter {
 
     @Override
     public void addFavoriteMovie(DoubanMovie doubanMovie) {
+
+    }
+
+    @Override
+    public void subscribe() {
+
+    }
+
+    @Override
+    public void unsubscribe() {
 
     }
 }

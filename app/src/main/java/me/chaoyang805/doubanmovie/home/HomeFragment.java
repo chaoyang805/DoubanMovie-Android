@@ -1,9 +1,8 @@
 package me.chaoyang805.doubanmovie.home;
 
-import android.graphics.Movie;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -51,7 +50,13 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.start();
+        mPresenter.subscribe();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mPresenter.unsubscribe();
     }
 
     @Override
@@ -88,6 +93,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
         private HomeContract.Presenter mPresenter;
         private List<DoubanMovie> mMovies;
+
         public MoviePagerAdapter(HomeContract.Presenter presenter, FragmentManager fm, List<DoubanMovie> movies) {
             super(fm);
             mPresenter = presenter;

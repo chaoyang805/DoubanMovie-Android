@@ -18,11 +18,17 @@ public class MovieDetailPresenter implements MovieDetailContract.Presenter {
     }
 
     @Override
-    public void start() {
+    public void loadMovieDetail(String movieId) {
+
     }
 
     @Override
-    public void loadMovieDetail(String movieId) {
+    public void subscribe() {
+
+    }
+
+    @Override
+    public void unsubscribe() {
 
     }
 }

@@ -1,9 +1,12 @@
 package me.chaoyang805.doubanmovie.home;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
-import java.util.List;
-
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import me.chaoyang805.doubanmovie.data.DoubanMovie;
 import me.chaoyang805.doubanmovie.data.source.MoviesRepository;
 
@@ -13,19 +16,29 @@ import me.chaoyang805.doubanmovie.data.source.MoviesRepository;
 
 public class HomePresenter implements HomeContract.Presenter {
 
+    private static final String TAG = "HomePresenter";
+
     private MoviesRepository mRepository;
     private HomeContract.View mHomeView;
-
+    private CompositeDisposable mCompositeDisposables;
     private boolean mIsFirstLoad = true;
+
     public HomePresenter(@NonNull MoviesRepository repository, @NonNull HomeContract.View view) {
         mRepository = repository;
         mHomeView = view;
         mHomeView.setPresenter(this);
+        mCompositeDisposables = new CompositeDisposable();
+    }
+
+
+    @Override
+    public void subscribe() {
+        loadMovies(false);
     }
 
     @Override
-    public void start() {
-        loadMovies(false);
+    public void unsubscribe() {
+        mCompositeDisposables.clear();
     }
 
     @Override
@@ -39,10 +52,25 @@ public class HomePresenter implements HomeContract.Presenter {
         if (showLoadingUI) {
             mHomeView.showLoadingIndicator();
         }
-        mRepository.shouldInvalidateCache(forceUpdate);
-        List<DoubanMovie> movies = mRepository.getTasks();
-        mHomeView.hideLoadingIndicator();
-        mHomeView.showMovies(movies);
+        mRepository.invalidateCache(forceUpdate);
+
+        Disposable disposable = mRepository
+            .loadMovies(0, 5)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(movies -> {
+                mHomeView.hideLoadingIndicator();
+                Log.d(TAG, "show movies");
+                mHomeView.showMovies(movies);
+            }, throwable -> {
+                mHomeView.hideLoadingIndicator();
+                mHomeView.showLoadingMoviesError();
+                throwable.printStackTrace();
+            }, () -> {
+                Log.d(TAG, "load movies complete");
+            });
+
+        mCompositeDisposables.add(disposable);
     }
 
     @Override

@@ -23,6 +23,6 @@ public class StringUtils {
             sb.append(item);
             sb.append(glueString);
         }
-        return sb.delete(sb.length() - 1 - glueString.length(),sb.length() - 1).toString();
+        return sb.delete(sb.length() - glueString.length(),sb.length()).toString();
     }
 }

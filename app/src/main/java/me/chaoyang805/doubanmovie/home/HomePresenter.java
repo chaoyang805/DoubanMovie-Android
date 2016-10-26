@@ -30,7 +30,6 @@ public class HomePresenter implements HomeContract.Presenter {
         mCompositeDisposables = new CompositeDisposable();
     }
 
-
     @Override
     public void subscribe() {
         loadMovies(false);
@@ -47,7 +46,6 @@ public class HomePresenter implements HomeContract.Presenter {
         loadMovies(forceUpdate || mIsFirstLoad, true);
         mIsFirstLoad = false;
     }
-
     private void loadMovies(boolean forceUpdate, boolean showLoadingUI) {
         if (showLoadingUI) {
             mHomeView.showLoadingIndicator();

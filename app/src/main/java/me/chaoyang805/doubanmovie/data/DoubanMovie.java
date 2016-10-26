@@ -1,5 +1,7 @@
 package me.chaoyang805.doubanmovie.data;
 
+import org.abego.treelayout.internal.util.java.lang.string.StringUtil;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -168,6 +170,11 @@ public class DoubanMovie extends RealmObject {
     }
 
     public String getGenresDesc() {
+        if (this.genres.isEmpty()) {
+            this.genresDesc = "";
+        } else {
+            this.genresDesc = StringUtils.combinedString(this.genres, "/");
+        }
         return genresDesc;
     }
 
@@ -179,6 +186,11 @@ public class DoubanMovie extends RealmObject {
     }
 
     public String getContriesDesc() {
+        if (this.contries.isEmpty()) {
+            this.contriesDesc = "";
+        } else {
+            this.contriesDesc = StringUtils.combinedString(this.contries, "/");
+        }
         return contriesDesc;
     }
 
@@ -227,7 +239,6 @@ public class DoubanMovie extends RealmObject {
 
     public void setGenres(List<String> genres) {
         this.genres = genres;
-        this.genresDesc = StringUtils.combinedString(genres, "/");
     }
 
     public List<String> getContries() {

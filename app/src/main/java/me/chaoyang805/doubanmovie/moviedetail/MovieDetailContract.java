@@ -15,6 +15,7 @@ public interface MovieDetailContract {
     }
 
     interface Presenter extends BasePresenter {
-        void loadMovieDetail(String movieId);
+        void loadMovieDetail();
+        void shareMovie(DoubanMovie movie);
     }
 }

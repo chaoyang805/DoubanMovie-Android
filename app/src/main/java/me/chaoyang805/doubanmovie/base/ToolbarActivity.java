@@ -1,11 +1,11 @@
 package me.chaoyang805.doubanmovie.base;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.DecelerateInterpolator;
@@ -37,23 +37,12 @@ public abstract class ToolbarActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(provideContentViewId());
-
-        setupToolbar();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+    public void setupToolbar(Toolbar toolbar) {
+        mToolbar = toolbar;
 
-    private void setupToolbar() {
-        mAppBar = (AppBarLayout) findViewById(R.id.appbar);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        if (mToolbar == null || mAppBar == null) {
+        if (mToolbar == null /*|| mAppBar == null*/) {
             throw new IllegalStateException(
                 "The subclass of ToolbarActivity must contain a toolbar."
             );
@@ -67,9 +56,6 @@ public abstract class ToolbarActivity extends BaseActivity {
             if (actionBar != null) {
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
-        }
-        if (Build.VERSION.SDK_INT >= 21) {
-            mAppBar.setElevation(10.6f);
         }
     }
 
@@ -99,12 +85,12 @@ public abstract class ToolbarActivity extends BaseActivity {
             .start();
         mIsHidden = !mIsHidden;
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.home, menu);
+//        return true;
+//    }
 
 
 }

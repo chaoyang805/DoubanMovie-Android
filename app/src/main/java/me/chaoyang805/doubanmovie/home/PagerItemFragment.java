@@ -5,6 +5,7 @@ import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import me.chaoyang805.doubanmovie.databinding.FragmentPagerItemBinding;
 
 public class PagerItemFragment extends Fragment {
 
+    private static final String TAG = "PagerItemFragment";
     private DoubanMovie mMovie;
     private HomeContract.Presenter mActionHandler;
     public static PagerItemFragment newInstance(DoubanMovie movie, HomeContract.Presenter presenter) {
@@ -41,6 +43,7 @@ public class PagerItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentPagerItemBinding binding = FragmentPagerItemBinding.inflate(inflater);
         binding.setMovie(mMovie);
+        Log.d(TAG, "binding setmovie");
         binding.setActionHandler(mActionHandler);
         return binding.getRoot();
     }

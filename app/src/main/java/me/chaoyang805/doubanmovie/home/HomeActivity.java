@@ -53,17 +53,6 @@ public class HomeActivity extends DrawerActivity
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.action_refresh) {
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -100,14 +89,12 @@ public class HomeActivity extends DrawerActivity
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = getMovieListFragment();
         ActivityUtils.addFragmentToActivity(fm, fragment, mContainer);
-        mToolbar.setTitle(R.string.title_movielist);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mToolbar.setTitle(R.string.title_now);
     }
 
     private void showHomePage() {
@@ -118,9 +105,7 @@ public class HomeActivity extends DrawerActivity
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), homeFragment, R.id.content_frame);
             mManagedFragments[0] = homeFragment;
         }
-        mPresenter = new HomePresenter(new MoviesRepository(getApplicationContext()), (HomeFragment)homeFragment);
-        mToolbar.setTitle(R.string.title_now);
-
+        mPresenter = new HomePresenter(MoviesRepository.getInstance(getApplicationContext()), (HomeFragment)homeFragment);
     }
 
     private void showSearchPage() {
@@ -128,7 +113,6 @@ public class HomeActivity extends DrawerActivity
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = getSearchFragment();
         ActivityUtils.addFragmentToActivity(fm, fragment, mContainer);
-        mToolbar.setTitle(R.string.title_search);
     }
 
     private void showFavoritePage() {
@@ -136,7 +120,6 @@ public class HomeActivity extends DrawerActivity
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = getFavoriteFragment();
         ActivityUtils.addFragmentToActivity(fm, fragment, mContainer);
-        mToolbar.setTitle(R.string.title_favorite);
 
     }
 

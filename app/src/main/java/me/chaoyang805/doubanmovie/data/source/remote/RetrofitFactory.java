@@ -15,14 +15,14 @@ public class RetrofitFactory {
     private static final Object obj = new Object();
 
     public static DoubanService getDoubanService(Context appContext, @Nullable CacheControlCallback callback) {
-        if (sInstance == null) {
-            synchronized (obj) {
-                if (sInstance == null) {
-                    sInstance = new DoubanAPI(appContext, callback).getDoubanService();
-                }
-            }
-        }
-        return sInstance;
+//        if (sInstance == null) {
+//            synchronized (obj) {
+//                if (sInstance == null) {
+//                    sInstance = new DoubanAPI(appContext, callback).getDoubanService();
+//                }
+//            }
+//        }
+        return new DoubanAPI(appContext, callback).getDoubanService();
     }
 
     // Another service ?

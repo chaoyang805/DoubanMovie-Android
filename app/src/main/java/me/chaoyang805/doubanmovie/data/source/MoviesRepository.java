@@ -18,7 +18,20 @@ public class MoviesRepository implements MoviesDataSource {
 
     private MoviesRemoteDataSource mRemoteDataSource;
 
-    public MoviesRepository(Context appContext) {
+    private static MoviesRepository sInstance = null;
+
+    public static MoviesRepository getInstance(Context appContext) {
+        if (sInstance == null) {
+            synchronized (MoviesRepository.class) {
+                if (sInstance == null) {
+                    sInstance = new MoviesRepository(appContext);
+                }
+            }
+        }
+        return sInstance;
+    }
+
+    private MoviesRepository(Context appContext) {
         mRemoteDataSource = new MoviesRemoteDataSource(appContext);
     }
 

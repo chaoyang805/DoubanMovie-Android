@@ -1,4 +1,4 @@
-package me.chaoyang805.doubanmovie.home;
+package me.chaoyang805.doubanmovie.base;
 
 import android.databinding.BindingAdapter;
 import android.widget.ImageView;
